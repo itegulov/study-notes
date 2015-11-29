@@ -1,0 +1,8 @@
+*.aux
+*.log
+*.toc
+*.out
+*.synctex.gz
+
+# Spacemacs auto-generated directory
+auto

@@ -1,0 +1,65 @@
+% Created 2015-11-29 Вск 16:00
+\documentclass[fleqn,12pt]{article}
+\usepackage{euler}
+\usepackage{amsmath}
+\usepackage{epigraph}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{proof}
+\usepackage[pdftitle={Курс теории типов по Штукенбергу Д. Г.}]{hyperref}
+\usepackage{amsthm}
+\usepackage{stmaryrd} % ⟦⟧
+\usepackage{enumitem} % 
+\usepackage{xcolor} % red color for worries
+\usepackage{pict2e} % templates
+\usepackage[left=2cm,right=1.6cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}	
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Palatino Linotype}
+\setmonofont{DejaVu Sans Mono}
+\usepackage{polyglossia}
+\setdefaultlanguage[babelshorthands=true]{russian}
+
+\renewcommand{\le}{\leqslant} % ≤
+\renewcommand{\leq}{\leqslant} % ≤
+\renewcommand{\ge}{\geqslant} % ≤
+\renewcommand{\geq}{\geqslant} % ≤
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\DeclareMathOperator{\plog}{plog}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Proof}{Proof}
+
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\s}[1]{\texttt{#1}}
+\newcommand{\xl}{$\lambda$}
+\newcommand{\+}{\lambda}
+\newcommand{\bredmath}{\ \longrightarrow_\beta\ }
+\newcommand{\bred}{$\bredmath$}
+\newcommand{\mbred}{$\ \longrightarrow\!\!\!\!\rightarrow_\beta\ $}
+\newcommand{\lid}[1]{\textit{#1}}
+\newcommand{\concat}{\hat{\ \ }}
+
+\newcommand\myworries[1]{\textcolor{red}{#1}}
+
+\def\ra{\rightarrow}
+
+\renewcommand{\theenumii}{\asbuk{enumii}}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{ы}
+
+\author{Daniyar Itegulov}
+\date{\today}
+\title{Курс теории типов по Штукенбергу Д.Г.}
+
+\begin{document}
+\theoremstyle{definition}
+\newtheorem*{definition}{Определение}
+\newtheorem*{example}{Пример}
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{axiom}{Аксиома}[section]
+\newtheorem{lemma}[theorem]{Лемма}
+
+\maketitle
+\tableofcontents
+
+\include{base}
+\end{document}
