@@ -1,0 +1,39 @@
+\section{Ticket 1: Нетипизированное лямбда исчисление, теорема Чёрча-Россера}
+\label{sec-2}
+\subsection{Основные определения}
+\label{sec-2-1}
+$Variable = {v_0, v_1, v_2 \dots}$ --- набор свободных переменных. \\
+$\Lambda^- := Variable | (\Lambda^- \Lambda^-) | (\lambda Variable . \Lambda^-)$ --- пред-терм. \\
+Конструкторы для пред-термов называются: 
+``Переменная'', ``Применение'' и ``Абстракция'' соответственно. \\
+Ассоциативность пробела левая и тело абстракции имеет высший приоритет
+(жадно набирает пока может).
+\begin{example}
+$\lambda x . a b c d e = \lambda x . ((((a b) c) d) e)$
+\end{example}
+Также допустимо писать $\lambda a b . A$ и это будет значить 
+$\lambda a . \lambda b . A$ (просто такой синтаксический сахар).
+
+Свободные переменные: \\
+Введём функцию $freeVariables :: \Lambda^- \to Set Variable$.
+Она будет находить все свободные переменные в пред-терме.
+\begin{enumerate}
+\item $freeVariables(x) = {x}$
+\item $freeVariables(A B) = freeVariables(A) \cup freeVariables(B)$
+\item $freeVariables(\lambda x . A) = freeVariables(A) \ {x}$
+\end{enumerate}
+Если $freeVariables(term) = \emptyset$, то терм $term$ называется замкнутым или
+закрытым.
+
+Введём понятие ``подстановка''. Будем обозначать $term[var:=otherTerm]$, если
+требуется в пред-терме $term$ подставить $otherTerm$ вместо всех свободных
+вхождений $var$.
+\begin{enumerate}
+\item $x[x:=N] = N$
+\item $y[x:=N] = y$
+\item $(P Q)[x:=N] = P[x:=N] Q[x:=N]$
+\item $(\lambda x . P)[x:=N] = \lambda x . P$
+\item $(\lambda y . P)[x:=N] = \lambda z . P[y:=z][x:=N]$ если $y \in freeVariables(N)$
+\item $(\lambda y . P)[x:=N] = \lambda y . P[x:=N]$ иначе
+\end{enumerate}
+\myworries{Ну тут можно что-то написать про Де-Брюина, но зачем?}
