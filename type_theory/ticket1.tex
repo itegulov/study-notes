@@ -3,7 +3,7 @@
 \subsection{Основные определения}
 \label{sec-2-1}
 \begin{eqnarray*}
-$Variable = {v_0, v_1, v_2 \dots}$
+Variable = \left\{v_0, v_1, v_2 \dots\right\}
 \end{eqnarray*}
 $Variable$ --- набор свободных переменных.
 \begin{eqnarray*}
@@ -74,3 +74,66 @@ $\Lambda = \Lambda^-_{=_\alpha} = \left\{ [M]_\alpha | M \in \Lambda^- \right\}$
 $(\lambda y . P)[x:=N] = \lambda y . P[x:= N]$, если $x \not= y$,
 где $y \not \in freeVariables(N)$
 \end{definition}
+\subsection{$\beta$-редукция и её свойства}
+\label{sec-2-3}
+\begin{definition}
+$\to_\beta$ --- наименьшее отношение на $\Lambda$, что:
+\begin{itemize}
+\item $\lambda x . P \to_\beta \lambda x . P'$, если $P \to_\beta P'$
+\item $(P Z) \to_\beta (R W)$, если $P \to_\beta R$ и $Z = W$ или 
+$Z \to_\beta W$ и $P = R$
+\item $(\lambda x . P) Q \to_\beta P[x:=Q]$, если $Q$ свободна для
+подстановки в $P$ относительно $x$
+\end{itemize}
+При этом терм вида $(\lambda x . P) Q$ называется $\beta$-редуксом,
+а $P[x:=Q]$ --- $\beta$-\myworries{контрактумом}.
+\end{definition}
+\begin{definition}
+Терм $T$ находится в нормальной форме, если $\not \exists T'$, что $T \to_\beta T'$.
+\end{definition}
+\begin{definition}
+Мультишаговая $\beta$-редукция: \\
+$A \twoheadrightarrow_\beta C$, если $\exists B_0 \dots B_n$, что
+$A \to_\beta B_0 \to_\beta \dots \to_\beta B_n \to_\beta C$.
+\end{definition}
+Некоторые свойства $\twoheadrightarrow_\beta$:
+\begin{itemize}
+\item Рефлексивность: $A \twoheadrightarrow_\beta A$
+\item Транзитивность
+\item $A \twoheadrightarrow_\beta A' \Rightarrow
+(A B) \twoheadrightarrow_\beta (A' B)$,
+$(B A) \twoheadrightarrow_\beta (B A')$,
+$\lambda x . A \twoheadrightarrow_\beta \lambda x . A'$
+\item $A \twoheadrightarrow_\beta A' \Rightarrow
+A[x:=B] \twoheadrightarrow_\beta A'[x:=B]$
+\item $A \twoheadrightarrow_\beta A' \Rightarrow
+C[x:=A] \twoheadrightarrow_\beta C[x:=A']$
+\end{itemize}
+\begin{proof}
+Из всех пунктов неочевиден только 4-ый.
+Без потери общности докажем, что $A \to_\beta A' \Rightarrow
+A[x:=B] \twoheadrightarrow_\beta A'[x:=B]$.
+Будем также считать, что все связанные переменные отличны от $x$.
+Используем индукцию по разности длин терма и редукса. \\
+База: Разность $= 0$
+\begin{align}
+& A = (\lambda y . P) Q \\
+& A' = P[y:=Q] \\
+& \text{Тогда } A[x:=B] = (\lambda y . P[x:=B]) Q[x:=B] \twoheadrightarrow_\beta \\
+& (P[x:=B])[y:=Q[x:=B]] = P[y:=Q][x:=B] = A'[x:=B] \\
+& \text{То есть } A[x:=B] \twoheadrightarrow_\beta A'[x:=B].
+\end{align}
+Переход: Раность $> 0$ \\
+Рассмотрим три случая:
+\begin{enumerate}
+\item $A = A_0 A_1$ \\
+Редекс находится внутри $A_0$ и по предположению индукции $A_0[x:=B]
+\twoheadrightarrow_\beta A_0'[x:=B]$, тогда очевидным образом основное
+утверждение верно.
+\item $A = A_0 A_1$ \\
+Редекс находится внутри $A_1$, а остальное аналогично пункту 1.
+\item $A = \lambda z . A_0$ \\
+Тогда из предположения индукции $A_0[x:=B] \to A_0'[x:=B]$ и
+очевидно утверждение верно (используя правила подстановки).
+\end{enumerate}
+\end{proof}
