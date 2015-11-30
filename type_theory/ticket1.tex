@@ -48,3 +48,29 @@ $\lambda a . \lambda b . A$ (просто такой синтаксически�
 \item $(\lambda y . P)[x:=N] = \lambda y . P[x:=N]$ иначе
 \end{itemize}
 \end{definition}
+\subsection{$\alpha$-эквивалентность и $\lambda$-термы}
+\label{sec-2-2}
+\begin{definition}
+$\alpha$-эвивалентность ($=_\alpha$) -- наименьшее отношение на $\Lambda^-$,
+что:
+\begin{itemize}
+\item $P =_\alpha P$ $\forall P$
+\item $\lambda x . P =_\alpha \lambda y . P [x:=y]$ если $y \not \in freeVariables(P)$
+\end{itemize}
+Также введём следующую операцию: $[M]_\alpha = \left\{ N \in \Lambda^- | M =_\alpha N \right\}$
+\end{definition}
+\begin{definition}
+$\Lambda = \Lambda^-_{=_\alpha} = \left\{ [M]_\alpha | M \in \Lambda^- \right\}$
+\end{definition}
+Отсюда и дальше под термами мы будем подразумевать лямбда-термы, а не 
+пред-термы, если не написано иначе.
+\begin{definition}
+Свободные переменные у лямбда-термов определяются точно так же
+как и у пред-термов
+\end{definition}
+\begin{definition}
+Подстановка в лямбда-термы определяются точно так же за исключением
+подстановки в применение: \\
+$(\lambda y . P)[x:=N] = \lambda y . P[x:= N]$, если $x \not= y$,
+где $y \not \in freeVariables(N)$
+\end{definition}
