@@ -137,3 +137,26 @@ A[x:=B] \twoheadrightarrow_\beta A'[x:=B]$.
 очевидно утверждение верно (используя правила подстановки).
 \end{enumerate}
 \end{proof}
+\subsection{Теорема Чёрча-Россера}
+\label{sec-2-4}
+\begin{theorem}
+$\forall M_1, M_2, M_3 \in \Lambda$:
+если $M_1 \twoheadrightarrow_\beta M_2$ и $M_1 \twoheadrightarrow_\beta M_3$,
+то существует $M_4$, что $M_2 \twoheadrightarrow_\beta M_4$ и $M_3
+\twoheadrightarrow M_4$.
+\end{theorem}
+Для доказательства теоремы введём новое отношение и сформулируем несколько
+вспомогательных лемм.
+\begin{definition}
+Отношение $\rightrightarrows$ (параллельная редукция) на $\Lambda$:
+\begin{itemize}
+\item $P \rightrightarrows P$
+\item $P \rightrightarrows P' \Rightarrow \lambda x . P \rightrightarrows
+\lambda x . P'$
+\item $P \rightrightarrows P' \& Q \rightrightarrows Q' \Rightarrow
+P Q \rightrightarrows P' Q'$
+\item $P \rightrightarrows P' \& Q \rightrightarrows Q' \Rightarrow
+(\lambda x . P) Q \rightrightarrows P'[x:=Q']$
+\end{itemize}
+Замечание: транзитивность отсутствует
+\end{definition}
