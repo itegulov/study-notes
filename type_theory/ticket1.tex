@@ -160,3 +160,27 @@ P Q \rightrightarrows P' Q'$
 \end{itemize}
 Замечание: транзитивность отсутствует
 \end{definition}
+\begin{lemma}
+$A \to_\beta A' \Rightarrow A \twoheadrightarrow_\beta A'$
+\end{lemma}
+\begin{proof}
+Пусть $R$ -- это редекс, который участвует в $A \to_\beta A'$. Проведём индукцию
+по разности длин терма $A$ и этого редекса. \\
+База: Разность $= 0$ \\
+Тогда $A = R = (\lambda x . M) N$ и в этом случае $A \twoheadrightarrow_\beta
+A'$ выводится по четвёртому правилу $\twoheadrightarrow_\beta$. \\
+Переход: Разность $> 0$ \\
+Тогда по предположению утверждение верно для всех пар $<Term, Redex>$, 
+для которых разность длин терма и редекса меньше, чем у $A$ и $R$.
+\begin{enumerate}
+\item $A = (A_0 A_1)$, $R$ находится внутри $A_0$. Пусть $A_0 \to_\beta A_0'$
+по редексу $R$ в $A_0$. Тогда по предположению $A_0 \twoheadrightarrow_\beta A_0'$.
+С учётом того, что $A_1 \twoheadrightarrow_\beta A_1$, по третьей аксиоме
+получаем: \\
+$A = (A_0 A_1) \twoheadrightarrow_\beta (A_0' A_1) = A'$
+\item $A = (A_0 A_1)$, $R$ находится внутри $A_1$. Аналогично первому пункту
+\item $A = \lambda x . A_0$, $R$ находится внутри $A_0$, тогда по предположению
+$A_0 \twoheadrightarrow_\beta A_0'$, тогда $A = \lambda x . A_0 
+\twoheadrightarrow_\beta \lambda x . A_0' = A'$
+\end{enumerate}
+\end{proof}
