@@ -184,3 +184,16 @@ $A_0 \twoheadrightarrow_\beta A_0'$, тогда $A = \lambda x . A_0
 \twoheadrightarrow_\beta \lambda x . A_0' = A'$
 \end{enumerate}
 \end{proof}
+\begin{lemma}
+$A \rightrightarrows A' \Rightarrow A \twoheadrightarrow_\beta A'$
+\end{lemma}
+\begin{proof}
+Покажем, что для всех аксиом $\rightrightarrows$ верно то же cамое. \\
+Первые три аксиомы верны в силу свойств $\beta$-редукции, доказанных в пункте
+выше. \\
+Четвёртое правило: $M \twoheadrightarrow_\beta M'$, $N \twoheadrightarrow_\beta
+N'$, тогда: \\
+$(\lambda x . M) N \to_\beta M[x:=N] \twoheadrightarrow M'[x:=N]
+\twoheadrightarrow_\beta M'[x:=N']$ \\
+Последние два перехода верны в силу тех же свойств $\twoheadrightarrow_\beta$. 
+\end{proof}
