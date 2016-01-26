@@ -1,0 +1,93 @@
+\section{Ticket 2: Булевские значения, чёрчевские нумералы, упорядоченные пары,
+  алгебраические типы. Нормальный и аппликативный порядок редукции.
+  Бета-эквивалентность и Y-комбинатор. Парадокс Карри.}
+\label{sec-3}
+\subsection{Булевские значения}
+\label{sec-3-1}
+Значения Булевской логики можно определить так:
+
+\begin{align*}
+T &= \lambda x . \lambda y . x \\
+F &= \lambda x . \lambda y . y
+\end{align*}
+
+Очевидно это просто два проектора. Определим несколько интересных операций в
+булевской логике:
+
+\begin{align*}
+ifThenElse &= \lambda A . \lambda P . \lambda Q . A P Q \\
+and &= \lambda A . \lambda B . A B F \\
+not &= \lambda A . A F T \\
+xor &= \lambda A . \lambda B . A (not B) B
+\end{align*}
+
+\subsection{Пары}
+\label{sec-3-2}
+Пара и её проекторы определяются следующим образом:
+\begin{align*}
+\langle A, B \rangle &= \lambda x . x A B \\
+\pi_1 &= \lambda x . \lambda y . x \\
+\pi_2 &= \lambda x . \lambda y . y \\
+fst &= \lambda p . p \pi_1 \\
+snd &= \lambda p . p \pi_2
+\end{align*}
+
+\subsection{Чёрчевские нумералы}
+\label{sec-3-3}
+
+Определим $n$-разовое приминение функции $f$ как:
+\begin{align*}
+f^0(A) &= A \\
+f^{n+1}(A) &= f(f^n(A))
+\end{align*}
+
+Тогда пусть $\bar{n}$ будет $n$-ым Чёрчевским нумералом, если:
+\begin{equation}
+\bar{n} = \lambda f . \lambda x . f^n(x)
+\end{equation}
+
+Наблюдение: $\bar{0} = F$.
+
+Определим арифметику на Чёрчевских нумералах:
+\begin{align*}
+isZero &= \lambda a . a \lambda x . F) T \\
+inc &= \lambda a . \lambda f . \lambda x . f (a f x) \\
+plus &= \lambda a . \lambda  b . \lambda f . \lambda x . a f (b f x) \\
+mul &= \lambda a . \lambda b . \lambda f . a (b f) \\
+pow &= \lambda a . \lambda b . b a
+\end{align*}
+
+Понимать их следует так: $isZero$ значит, что если хоть раз будет применено $f$, 
+то число не ноль, иначе ноль. $inc$ значит, что нужно ещё
+один раз применить $f$ к $a$. $plus$ значит, что нужно просто передать значение
+$a$ как начальное значение $b$.
+
+Также с помощью пар можно реализовать вычитание. Начнём с $\langle 0, 0 \rangle$ и будем
+поддерживать пару $\langle n, n - 1 \rangle$, пока $n$ не окажется равным $a$.
+\begin{equation}
+dec = \lambda a . snd (a (\lambda p . \langle inc (fst p); fst p \rangle ) \langle 0, 0 \rangle )
+\end{equation}
+
+\subsection{Алгебраические типы}
+\label{sec-3-4}
+
+\myworries{Алгебраический тип -- любой сложный тип, состоящий из более простых
+  типов}
+
+\subsection{Нормальный и аппликативный порядок редукции}
+\label{sec-3-5}
+Рассмотрим способы редуцирования терма
+\begin{align*}
+v &\not\rightarrow_\beta \\
+\lambda x . M &\rightarrow_\beta \lambda x . M' \\
+M N &\rightarrow_\beta M' N \\
+M N &\rightarrow_\beta M N'
+\end{align*}
+Получается, что выбор в редуцировании возникает только в аппликации. Тогда
+определим эти порядки редукции:
+
+Нормальный порядок редукции -- редукция, при которой первым делом сокращается
+редекс $(\lambda x . M) N$.
+
+Аппликативный порядок редукции -- редукция, при которой первым делом сокращается
+$N$, а затем уже редекс $(\lambda x . M) N'$.
