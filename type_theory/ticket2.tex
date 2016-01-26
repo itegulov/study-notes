@@ -91,3 +91,44 @@ M N &\rightarrow_\beta M N'
 
 Аппликативный порядок редукции -- редукция, при которой первым делом сокращается
 $N$, а затем уже редекс $(\lambda x . M) N'$.
+
+\subsection{$\beta$-эквивалентность}
+\label{sec-3-6}
+
+Бинарное отношение $=_\beta$ над $\Lambda$ определяется индуктивно:
+
+\begin{align*}
+M \twoheadrightarrow_\beta N &\Rightarrow M =_\beta N \\
+M =_\beta N &\Rightarrow N =_\beta M \\
+M =_\beta N, N =_\beta L &\Rightarrow M =_\beta L
+\end{align*}
+
+Интуитивно: два терма $M$ и $N$ связаны отношением $=_\beta$, если есть
+связывающая их цепочка $\rightarrow_\beta$-стрелок.
+
+Пример: \\
+\includegraphics[scale=0.5]{resources/beta_equality.png}
+
+\subsection{Y-комбинатор}
+\label{sec-3-7}
+
+\begin{theorem}
+Для любого $F$ найдётся такой $X$ (неподвижная точка), что:
+\begin{equation}
+F X =_\beta X
+\end{equation}
+\end{theorem}
+\begin{proof}
+Пусть $W = \lambda x . F (x x)$, а $X = WW$. Тогда $X = WW = (\lambda x . F (x
+x)) W = F (W W) = F X$
+\end{proof}
+
+\begin{theorem}
+Существует комбинатор неподвижной точки $Y = \lambda f . (\lambda x . f (x x))
+(\lambda x . f (x x))$ такой, что $\forall F \  F (Y F) = Y F$
+\end{theorem}
+\begin{proof}
+Очевидно если расписать $Y F$
+\end{proof}
+
+\myworries{Возможно стоит сказать о F =_\beta M[f:=F]}
