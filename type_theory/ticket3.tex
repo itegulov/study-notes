@@ -1,0 +1,69 @@
+\section{Ticket 3: Просто типизированное лямбда-исчисление. Исчисление по Чёрчу и по Карри.
+Основные леммы, изоморфизм Карри-Ховарда. Нетипизируемость Y-комбинатора.}
+\label{sec-4}
+\subsection{Простотипизированное лямбда-исчисление по Карри}
+\label{sec-4-1}
+Пусть $U$ -- множество простых (атомарных) типов. \\
+Грамматика для типов: $\Pi = U | \Pi \rightarrow \Pi$
+
+Контекстом будем называть множество пар вида $x_n:\tau_n$, причем $x_i \not =
+x_j$, для $i \not = j$.
+\begin{align*}
+dom(\Gamma) = \{ x_i | x_i:\tau_i \in \Gamma \} \\
+range(\Gamma) = \{ \tau_i | x_i:\tau_i in \Gamma \}
+\end{align*}
+
+Аксиомы типизации:
+
+\begin{enumerate}
+\item
+$\infer{\Gamma, x:\tau \vdash x:\tau}{}$
+\item
+$\infer{\Gamma \vdash (M N):\tau}{\Gamma \vdash M: \sigma \rightarrow
+\tau; \Gamma \vdash N: \sigma}$
+\item
+$\infer{\Gamma \vdash \lambda x. M: \sigma \rightarrow \tau}{\Gamma, x:\sigma \vdash M:\tau}$
+\end{enumerate}
+
+$M \in \Lambda$ называется типизируемым, если существуют $\Gamma$ и $\sigma$
+такие, что $\Gamma \vdash M:\sigma$. Таким образом будем называть простотипизированным лямбда-исчислением тройку
+$(\Lambda, \Pi, \vdash)$.
+
+Определим подстановку типа $\tau$ вместо $\alpha$ в тип $\sigma$
+($\sigma[\alpha:=\tau]$):
+\begin{align*}
+\alpha[\alpha:=\tau] &= \tau \\
+\beta[\alpha:=\tau] &= \beta \\
+(\sigma_1 \rightarrow \sigma_2)[\alpha:=\tau] &= \sigma_1[\alpha:=\tau] \rightarrow \sigma_2[\alpha:=\tau]
+\end{align*}
+
+Нотация $\Gamma[\alpha:=\tau]$ обозначает $\{ (x:\sigma[\alpha:=\tau] |
+(x:\sigma) \in \Gamma) \}$
+
+\subsection{Базовые леммы}
+\label{sec-4-2}
+
+\myworries{TODO: Тут надо расписать не очень интеллектуальные и не очень интересные
+  леммы}
+
+\subsection{Нетипизируемость Y-комбинатора}
+\label{sec-4-3}
+
+Запихиваем $(\lambda x . x x) (\lambda x . x x)$ в type-inference алгоритм и он
+скажет, что типа нет.
+
+\myworries{TODO: Тут надо написать что-то более формальное и если у кого-то есть
+свободное время, то прошу}
+
+
+\subsection{Простотипизированное лямбда-исчисление по Чёрчу}
+\label{sec-4-3}
+
+Пусть $V_\sigma$ -- набор свободных переменных типа $\sigma$. Тогда:
+\begin{align*}
+x \in V_\sigma &\Rightarrow x \in \Lambda_\sigma \\
+M \in \Lambda_{\sigma \rightarrow \tau}; N \in \Lambda_{\sigma} &\Rightarrow M N \in \Lambda_\tau \\
+M \in \Lambda_\tau; x \in \Lambda_\sigma &\Rightarrow \lambda x^\sigma . M \in \Lambda_{\sigma \rightarrow \tau}
+\end{align*}
+Псевдо-терм: $\Lambda_\pi := V | (\lambda x:\Pi: \Lambda_\pi) | (\Lambda_\pi
+\Lambda_\pi)$
