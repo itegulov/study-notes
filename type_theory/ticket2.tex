@@ -131,4 +131,42 @@ x)) W = F (W W) = F X$
 Очевидно если расписать $Y F$
 \end{proof}
 
-\myworries{Возможно стоит сказать о F =_\beta M[f:=F]}
+% \myworries{Возможно стоит сказать о F =_\beta M[f:=F]}
+
+\subsection{Парадокс Карри}
+
+Построим исчисление высказываний на основе язык лямбда выражений. Для этого
+добавим к аппликации импликацию ($\supset$), которое будет действовать по
+следующим правилам:
+
+\begin{align*}
+A =_\beta B &\Rightarrow \ \vdash A \supset B \\
+A =_\beta B &\Rightarrow \ \vdash B \supset A \\
+\end{align*}
+
+Также мы ожидаем доказуемости следующих свойств:
+
+\begin{align*}
+&\vdash \alpha \supset \alpha \\
+\alpha \supset \alpha \supset \beta &\vdash \alpha \supset \beta 
+\end{align*}
+
+Однако, так построенное исчисление черезчур мощно, о чём свидетельствует
+следующее утверждение:
+
+Рассмотрим выражение $F_\alpha \equiv \lambda x. x x \supset \alpha$ 
+и выражение $\Phi_\alpha \equiv F_\alpha F_\alpha$.
+Нетрудно видеть, что $\Phi_\alpha =_\beta \Phi_\alpha \supset \alpha$.
+Тогда: \\
+
+\begin{tabular}{ll}
+$\vdash \Phi_\alpha \supset \Phi_\alpha$ & Доказуемое утверждение\\
+$\vdash \Phi_\alpha \supset \Phi_\alpha \supset \alpha$ & По определению ($=_\beta$)\\
+$\vdash (\Phi_\alpha \supset \Phi_\alpha \supset \alpha) \supset (\Phi_\alpha \supset \alpha)$ & Доказуемое утверждение\\
+$\vdash \Phi_\alpha \supset \alpha$ & M.P.\\
+$\vdash \Phi_\alpha$ & бета-эквивалентность\\
+$\vdash \alpha$ & M.P.
+\end{tabular}
+
+Таким образом мы показали, что любое утверждение может быть выведено в данной
+системе, т.е. система противоречива.
